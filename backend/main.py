@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .api.research import router
-
+import os
 
 app = FastAPI(
     title="Research AI API",
@@ -11,7 +11,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-
+frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
