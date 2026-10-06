@@ -3,8 +3,11 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from .tools import web_search,reader
 from langgraph.types import interrupt
+import os
+from langchain_google_genai import ChatGoogleGenerativeAI
+from dotenv import load_dotenv
 
-
+load_dotenv()
 
 
 
@@ -12,7 +15,15 @@ from langgraph.types import interrupt
 
 ## model and parser
 
-model = ChatOllama(model="phi4-mini:3.8b")
+if os.getenv("MODEL_PROVIDER", "ollama").lower() == "gemini":
+    model = ChatGoogleGenerativeAI(
+        model=os.getenv("GEMINI_MODEL", "gemini-3-flash-preview"),
+        google_api_key=os.getenv("GEMINI_API_KEY"),
+    )
+else:
+    model = ChatOllama(
+        model=os.getenv("OLLAMA_MODEL", "phi4-mini:3.8b")
+    )
 parser = StrOutputParser()
 
 
