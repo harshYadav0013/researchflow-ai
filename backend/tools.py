@@ -11,7 +11,7 @@ import os
 ## Search tool
 
 tavily = TavilyClient(
-    api_base_url=os.getenv("TAVILY_API_KEY")
+    api_key=os.getenv("TAVILY_API_KEY")
 )
 
 
