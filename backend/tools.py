@@ -52,7 +52,7 @@ def reader(url:str) -> str:
         text = soup.get_text()
 
         text = " ".join(text.split())
-        return text[:2500]
+        return text[:5000]
     
     except Exception as e:
         return f"failed to fetch URL : {e}"
